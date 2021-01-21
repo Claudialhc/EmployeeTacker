@@ -12,3 +12,24 @@ const cTable = require('console.table');
 //     age: 20
 //   }
 // ]);
+// create the connection information for the sql database
+
+//uncomment when you get workbench to work again lines 17-35
+// const connection = mysql.createConnection({
+//     host: "localhost",
+//     // My PORT
+//     port: 3306,
+//     // Your username
+//     user: "root",
+//     // Your password
+//     password: "password",
+//     database: "employee_DB",
+//   });
+//   // connect to the mysql server and sql database
+//   connection.connect((err) => {
+//     if (err) {
+//       throw err;
+//     }
+//     // run the start function after the connection is made to prompt the user
+//     return start();
+//   });
