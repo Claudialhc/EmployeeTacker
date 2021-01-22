@@ -97,10 +97,30 @@ function employeesView() {
 }
 
 // TODO:
-function deptView() {}
+function deptView() {
+    var query = "SELECT * FROM department";
+  connection.query(query, (err, res) => {
+    //check if correct
+    if (err) {
+      return console.log(err);
+    }
+    console.table(res);
+    start();
+  });
+}
 
 // TODO:
-function rolesView() {}
+function rolesView() {
+    var query = "SELECT * FROM roles";
+  connection.query(query, (err, res) => {
+    //check if correct
+    if (err) {
+      return console.log(err);
+    }
+    console.table(res);
+    start();
+  });
+}
 
 // TODO:
 function addEmployee() {
@@ -109,22 +129,22 @@ function addEmployee() {
       {
         type: "input",
         message: "What is your employee's first name?",
-        name: "firstName",
+        name: "firstName"
       },
       {
         type: "input",
         message: "What is your employee's last name?",
-        name: "lastName",
+        name: "lastName"
       },
       {
         type: "input",
         message: "What is your employee's role id?",
-        name: "roleId",
+        name: "roleId"
       },
       {
         type: "input",
         message: "What is your employee's manager id?",
-        name: "managerId",
+        name: "managerId"
       },
     ])
     .then(function (answer) {
@@ -144,10 +164,45 @@ function addEmployee() {
 }
 
 // TODO:
-function addDepartment() {}
+function addDepartment() {
+    inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What department do you wish to add?",
+        name: "addDepartment"
+      },
+      {
+        type: "input",
+        message: "What is the name of your department?",
+        name: "deptName"
+      },
+      {
+        type: "input",
+        message: "What is the department id?",
+        name: "roleId"
+      }
+    ])
+    .then(function (answer) {
+      //   console.log(answer);
+      var query = "INSERT INTO department";
+      connection.query(
+        query,
+        { addDepartment: answer.addDepartment },
+        (err, res) => {
+          if (err) {
+            return console.log(err);
+          }
+          start();
+        }
+      );
+    });
+}
 
 // TODO:
-function addRole() {}
+function addRole() {
+    
+}
 
 // TODO:
 function updateEmployeeRole() {}
