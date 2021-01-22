@@ -111,7 +111,7 @@ function deptView() {
 
 // TODO:
 function rolesView() {
-    var query = "SELECT * FROM roles";
+    var query = "SELECT * FROM role";
   connection.query(query, (err, res) => {
     //check if correct
     if (err) {
@@ -174,13 +174,8 @@ function addDepartment() {
       },
       {
         type: "input",
-        message: "What is the name of your department?",
-        name: "deptName"
-      },
-      {
-        type: "input",
         message: "What is the department id?",
-        name: "roleId"
+        name: "deptId"
       }
     ])
     .then(function (answer) {
