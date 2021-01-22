@@ -150,12 +150,39 @@ const cTable = require('console.table');
                       for (var i = 0; i < res.length; i++) {
                         console.log(
                           "Manager: " +
-                            res[i].name +
+                            res[i].manager +
                             "\nname: " +
-                            res[i].song +
-                            "\nrole: " //do I need role here??
+                            res[i].name +
+                            "\nrole: " +
+                            res[i].role 
                         );
                       }
                       start();
                     });
                   });
+                  function addEmployee() {
+                    inquirer
+                      .prompt({
+                        type: "input",
+                        message: "Which employee would you like to add?",
+                        name: "employeeAdd",
+                      })
+                      .then(function (answer) {
+                        var query = "SELECT  "; //when workbench figured out insert the select here
+                        connection.query(query, { addEmployee: answer.addEmployee }, (err, res) => {
+                          if (err) {
+                            return console.log(err);
+                          }
+                          for (var i = 0; i < res.length; i++) {
+                            console.log(
+                              "name: " +
+                                res[i].name +
+                                "\ndepartment: " +
+                                res[i].department +
+                                "\nrole: " +
+                                res[i].role
+                            );
+                          }
+                          start();
+                        });
+                      });
