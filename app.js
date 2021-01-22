@@ -2,17 +2,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
-//below to check if console.table works
-// console.table([
-//   {
-//     name: 'foo',
-//     age: 10
-//   }, {
-//     name: 'bar',
-//     age: 20
-//   }
-// ]);
-// create the connection information for the sql database
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -84,7 +73,6 @@ function start() {
     });
 }
 function employeesView() {
-  // TODO: if you want the complicated version try using joins
   var query = "SELECT * FROM employee";
   connection.query(query, (err, res) => {
     //check if correct
@@ -96,7 +84,6 @@ function employeesView() {
   });
 }
 
-// TODO:
 function deptView() {
     var query = "SELECT * FROM department";
   connection.query(query, (err, res) => {
@@ -109,7 +96,6 @@ function deptView() {
   });
 }
 
-// TODO:
 function rolesView() {
     var query = "SELECT * FROM role";
   connection.query(query, (err, res) => {
@@ -129,34 +115,38 @@ function addEmployee() {
       {
         type: "input",
         message: "What is your employee's first name?",
-        name: "firstName"
+        name: "firstName",
       },
       {
         type: "input",
         message: "What is your employee's last name?",
-        name: "lastName"
+        name: "lastName",
       },
       {
         type: "input",
         message: "What is your employee's role id?",
-        name: "roleId"
+        name: "roleId",
       },
       {
         type: "input",
         message: "What is your employee's manager id?",
-        name: "managerId"
+        name: "managerId",
       },
     ])
     .then(function (answer) {
-      //   console.log(answer);
-      var query = "INSERT INTO role";
+        // console.log("work");
+      var query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ?";
       connection.query(
         query,
-        { addEmployee: answer.addEmployee },
+        { first_name : answer.firstName, 
+          last_name : answer.lastName, 
+          role_id : answer.roleId, 
+          manager_id : answer.managerId },
         (err, res) => {
           if (err) {
             return console.log(err);
           }
+          console.table(res)
           start();
         }
       );
@@ -170,12 +160,12 @@ function addDepartment() {
       {
         type: "input",
         message: "What department do you wish to add?",
-        name: "addDepartment"
+        name: "addDepartment",
       },
       {
         type: "input",
         message: "What is the department id?",
-        name: "deptId"
+        name: "deptId",
       }
     ])
     .then(function (answer) {
@@ -194,24 +184,24 @@ function addDepartment() {
     });
 }
 
-// TODO:
+// // TODO:
 function addRole() {
     inquirer
     .prompt([
       {
         type: "input",
         message: "What role do you want to add?",
-        name: "addrole"
+        name: "addrole",
       },
       {
         type: "input",
         message: "What department does this role belong to?",
-        name: "deptRole"
+        name: "deptRole",
       },
       {
         type: "input",
         message: "What employee is this role assigned to?",
-        name: "roleEmployee"
+        name: "roleEmployee",
       }
     ])
     .then(function (answer) {
@@ -230,24 +220,24 @@ function addRole() {
     });
 }
 
-// TODO:
+ // TODO:
 function updateEmployeeRole() {
     inquirer
     .prompt([
       {
         type: "input",
         message: "Which employee would you like to update?",
-        name: "updateEmployee"
+        name: "updateEmployee",
       },
       {
         type: "input",
         message: "What is their updated depatment?",
-        name: "updateDept"
+        name: "updateDept",
       },
       {
         type: "input",
         message: "What is their updated role?",
-        name: "roleEmployee"
+        name: "roleEmployee",
       }
     ])
     .then(function (answer) {
