@@ -128,9 +128,34 @@ const cTable = require('console.table');
                         res[i].name +
                         "\nname: " +
                         res[i].song +
-                        "\nrole: "
+                        "\nrole: " // is role necessary here??
                     );
                   }
                   start();
                 });
               });
+              function employeemanagerSearch() {
+                inquirer
+                  .prompt({
+                    type: "input",
+                    message: "Which employee would you like to see by manager?",
+                    name: "searchManagerEmployee",
+                  })
+                  .then(function (answer) {
+                    var query = "SELECT  "; //when workbench figured out insert the select here
+                    connection.query(query, { searchManagerEmployee: answer.searchManagerEmployee }, (err, res) => {
+                      if (err) {
+                        return console.log(err);
+                      }
+                      for (var i = 0; i < res.length; i++) {
+                        console.log(
+                          "Manager: " +
+                            res[i].name +
+                            "\nname: " +
+                            res[i].song +
+                            "\nrole: " //do I need role here??
+                        );
+                      }
+                      start();
+                    });
+                  });
