@@ -149,7 +149,7 @@ function addEmployee() {
     ])
     .then(function (answer) {
       //   console.log(answer);
-      var query = "INSERT INTO employee";
+      var query = "INSERT INTO role";
       connection.query(
         query,
         { addEmployee: answer.addEmployee },
@@ -201,70 +201,40 @@ function addDepartment() {
 
 // TODO:
 function addRole() {
-    
+    inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What role do you want to add?",
+        name: "addrole"
+      },
+      {
+        type: "input",
+        message: "What department does this role belong to?",
+        name: "deptRole"
+      },
+      {
+        type: "input",
+        message: "What employee is this role assigned to?",
+        name: "roleEmployee"
+      }
+    ])
+    .then(function (answer) {
+      //   console.log(answer);
+      var query = "INSERT INTO role";
+      connection.query(
+        query,
+        { addRole: answer.addRole },
+        (err, res) => {
+          if (err) {
+            return console.log(err);
+          }
+          start();
+        }
+      );
+    });
 }
 
 // TODO:
 function updateEmployeeRole() {}
-function employeeDeptSearch() {
-  inquirer
-    .prompt({
-      type: "input",
-      message: "Which department would you like to search for an employee in?",
-      name: "searchDeptEmployee",
-    })
-    .then(function (answer) {
-      var query = "SELECT  "; //when workbench figured out insert the select here
-      connection.query(
-        query,
-        { searchDeptEmployee: answer.searchDeptEmployee },
-        (err, res) => {
-          if (err) {
-            return console.log(err);
-          }
-          for (var i = 0; i < res.length; i++) {
-            console.log(
-              "Department: " +
-                res[i].deparment +
-                "\nname: " +
-                res[i].name +
-                "\nrole: " +
-                res[i].role
-            );
-          }
-          start();
-        }
-      );
-    });
-}
-function employeemanagerSearch() {
-  inquirer
-    .prompt({
-      type: "input",
-      message: "Which employee would you like to see by manager?",
-      name: "searchManagerEmployee",
-    })
-    .then(function (answer) {
-      var query = "SELECT  "; //when workbench figured out insert the select here
-      connection.query(
-        query,
-        { searchManagerEmployee: answer.searchManagerEmployee },
-        (err, res) => {
-          if (err) {
-            return console.log(err);
-          }
-          for (var i = 0; i < res.length; i++) {
-            console.log(
-              "Manager: " +
-                res[i].manager +
-                "\nname: " +
-                res[i].name +
-                "\nrole: " +
-                res[i].role
-            );
-          }
-          start();
-        }
-      );
-    });
-}
+
