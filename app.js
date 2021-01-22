@@ -23,7 +23,7 @@ const cTable = require('console.table');
 //     user: "root",
 //     // Your password
 //     password: "password",
-//     database: "employee_DB",
+//     database: "employee_trackerDB",
 //   });
 //   // connect to the mysql server and sql database
 //   connection.connect((err) => {
@@ -33,3 +33,54 @@ const cTable = require('console.table');
 //     // run the start function after the connection is made to prompt the user
 //     return start();
 //   });
+
+  function start() {
+    return inquirer
+      .prompt({
+        
+        type: "list",
+        message: "What would you like to do",
+        name: "mainMenu",
+        choices: [
+          "View All Employee",
+          "View All Employee by Department",
+          "View All Employee by Manager",
+          "Add Employee",
+          "Remove Employee",
+          "Update Employee Role",
+          "Update Employee Manager",
+          "Exit"
+        ],
+      })
+      .then((answer) => {
+        // based on their answer, either 
+        switch (answer.action) {
+          case "View All Employees":
+            employeeSearch();
+            break;
+          case "View All Employee by Department":
+            employeeDeptSearch();
+            break;
+          case "View All Employee by Manager":
+            employeeManagerSearch();
+            break;
+          case "Add Employee":
+            addEmployee();
+            break;
+          case "Remove Employee":
+            removeEmployee();
+            break;
+          case "Update Employee Role":
+            updateEmployeeRole();
+            break;
+          case "Update Employee Manager":
+            updateEmployeeManager();
+            break;
+          default:
+            connection.end();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        process.exit(1);
+      });
