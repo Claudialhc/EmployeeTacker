@@ -84,3 +84,53 @@ const cTable = require('console.table');
         console.log(error);
         process.exit(1);
       });
+      function employeeSearch() {
+        inquirer
+          .prompt({
+            type: "input",
+            message: "Which employee would you like to search for?",
+            name: "searchEmployee",
+          })
+          .then(function (answer) {
+            var query = "SELECT  "; //when workbench figured out insert the select here
+            connection.query(query, { searchEmployee: answer.searchEmployee }, (err, res) => { //check if correct 
+              if (err) {
+                return console.log(err);
+              }
+              for (var i = 0; i < res.length; i++) {
+                console.log(
+                  "Position: " +
+                    res[i].name +
+                    "\nrole: " +
+                    res[i].song +
+                    "\ndepartment: "
+                );
+              }
+              start();
+            });
+          });
+          function employeeDeptSearch() {
+            inquirer
+              .prompt({
+                type: "input",
+                message: "Which department would you like to search for an employee in?",
+                name: "searchDeptEmployee",
+              })
+              .then(function (answer) {
+                var query = "SELECT  "; //when workbench figured out insert the select here
+                connection.query(query, { searchDeptEmployee: answer.searchDeptEmployee }, (err, res) => {
+                  if (err) {
+                    return console.log(err);
+                  }
+                  for (var i = 0; i < res.length; i++) {
+                    console.log(
+                      "Department: " +
+                        res[i].name +
+                        "\nname: " +
+                        res[i].song +
+                        "\nrole: "
+                    );
+                  }
+                  start();
+                });
+              });
