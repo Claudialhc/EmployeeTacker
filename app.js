@@ -135,7 +135,7 @@ function addEmployee() {
     ])
     .then(function (answer) {
         // console.log("work");
-      var query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ?";
+      var query = "INSERT INTO employee SET ?";
       connection.query(
         query,
         { first_name : answer.firstName, 
@@ -146,7 +146,6 @@ function addEmployee() {
           if (err) {
             return console.log(err);
           }
-          console.table(res)
           start();
         }
       );
@@ -170,7 +169,7 @@ function addDepartment() {
     ])
     .then(function (answer) {
       //   console.log(answer);
-      var query = "INSERT INTO department";
+      var query = "INSERT INTO department set";
       connection.query(
         query,
         { addDepartment: answer.addDepartment },
