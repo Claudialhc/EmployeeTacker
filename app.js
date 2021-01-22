@@ -169,10 +169,11 @@ function addDepartment() {
     ])
     .then(function (answer) {
       //   console.log(answer);
-      var query = "INSERT INTO department set";
+      var query = "INSERT INTO department SET ?";
       connection.query(
         query,
-        { addDepartment: answer.addDepartment },
+        { id : answer.deptId,
+          name : answer.addDepartment },
         (err, res) => {
           if (err) {
             return console.log(err);
@@ -190,25 +191,34 @@ function addRole() {
       {
         type: "input",
         message: "What role do you want to add?",
-        name: "addrole",
+        name: "addrole", //title
       },
       {
         type: "input",
-        message: "What department does this role belong to?",
-        name: "deptRole",
+        message: "What department id does this role belong to?",
+        name: "deptRole", //deparment_id
       },
       {
         type: "input",
-        message: "What employee is this role assigned to?",
-        name: "roleEmployee",
+        message: "What is the id for this role?",
+        name: "idRole", //id
+      },
+      {
+        type: "input",
+        message: "What is the salary for this role?",
+        name: "roleSalary", //salary
       }
     ])
     .then(function (answer) {
       //   console.log(answer);
-      var query = "INSERT INTO role";
+      var query = "INSERT INTO role SET ?";
       connection.query(
         query,
-        { addRole: answer.addRole },
+        { title : answer.addRole,
+          department_id : answer.department_id,
+          salary : answer.roleSalary,
+          id : answer.idRole
+           },
         (err, res) => {
           if (err) {
             return console.log(err);
