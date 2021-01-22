@@ -236,25 +236,27 @@ function updateEmployeeRole() {
       {
         type: "input",
         message: "Which employee would you like to update?",
-        name: "updateEmployee",
+        name: "updateEmployee", //name
       },
       {
         type: "input",
-        message: "What is their updated depatment?",
-        name: "updateDept",
+        message: "What is their updated role id?",
+        name: "updateRole", //role_ID
       },
       {
         type: "input",
-        message: "What is their updated role?",
-        name: "roleEmployee",
+        message: "What is their updated manager's id?",
+        name: "id_manager",
       }
     ])
     .then(function (answer) {
       //   console.log(answer);
-      var query = "INSERT INTO employee";
+      var query = "UPDATE employee SET ?";
       connection.query(
         query,
-        { addRole: answer.addEmployeeRole },
+        { first_name : answer.updateEmployee,
+          role_id : answer.updateRole,
+          manager_id : answer.manager_id},
         (err, res) => {
           if (err) {
             return console.log(err);
