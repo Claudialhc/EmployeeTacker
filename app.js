@@ -100,10 +100,11 @@ const cTable = require('console.table');
               for (var i = 0; i < res.length; i++) {
                 console.log(
                   "Position: " +
-                    res[i].name +
+                    res[i].position +
                     "\nrole: " +
-                    res[i].song +
-                    "\ndepartment: "
+                    res[i].role +
+                    "\ndepartment: " +
+                    res[i].department
                 );
               }
               start();
@@ -125,10 +126,11 @@ const cTable = require('console.table');
                   for (var i = 0; i < res.length; i++) {
                     console.log(
                       "Department: " +
-                        res[i].name +
+                        res[i].deparment +
                         "\nname: " +
-                        res[i].song +
-                        "\nrole: " // is role necessary here??
+                        res[i].name +
+                        "\nrole: " +
+                        res[i].role
                     );
                   }
                   start();
