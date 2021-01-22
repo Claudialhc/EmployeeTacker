@@ -236,5 +236,38 @@ function addRole() {
 }
 
 // TODO:
-function updateEmployeeRole() {}
+function updateEmployeeRole() {
+    inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Which employee would you like to update?",
+        name: "updateEmployee"
+      },
+      {
+        type: "input",
+        message: "What is their updated depatment?",
+        name: "updateDept"
+      },
+      {
+        type: "input",
+        message: "What is their updated role?",
+        name: "roleEmployee"
+      }
+    ])
+    .then(function (answer) {
+      //   console.log(answer);
+      var query = "INSERT INTO employee";
+      connection.query(
+        query,
+        { addRole: answer.addEmployeeRole },
+        (err, res) => {
+          if (err) {
+            return console.log(err);
+          }
+          start();
+        }
+      );
+    });
+}
 
