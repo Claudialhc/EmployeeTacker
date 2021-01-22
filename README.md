@@ -18,4 +18,4 @@ function employeesView() {
 
 
 Link to GitHub Repo: https://github.com/Claudialhc/EmployeeTracker
-Link to Video Demo: https://drive.google.com/file/d/1NcXi-kuezYO0SnANgnW8m7lKzW1WGJbG/view
+Link to Video Demo: https://drive.google.com/file/d/1jFT2THRfM_9vJ3vhDG1URNMAtrGtxTM9/view
